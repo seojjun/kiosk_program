@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:kiosk_program/utils/colors.dart';
+import 'package:kiosk_program/utils/menu_category.dart';
+import 'package:kiosk_program/widgets/menu_list.dart';
+import 'package:kiosk_program/widgets/menu_tab_bar.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger();
 
 class MenuScreen extends StatefulWidget {
-  const MenuScreen({super.key, required this.title});
+  const MenuScreen({
+    super.key,
+    required this.title,
+  });
 
   final String title;
 
@@ -9,57 +19,48 @@ class MenuScreen extends StatefulWidget {
   State<MenuScreen> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MenuScreen> {
-  List menuImages = [
-    "김밥.jpg",
-    "돈까스.jpg",
-    "떡볶이.jpg",
-    "오므라이스.jpg",
-    "쫄면.jpg",
-    "카레.jpg",
+class _MyHomePageState extends State<MenuScreen>
+    with SingleTickerProviderStateMixin {
+  List<Tab> menuTabList = [
+    const Tab(text: korean),
+    const Tab(text: japanese),
+    const Tab(text: chinese),
+    const Tab(text: western),
   ];
-
-  List menuNames = [
-    "김밥",
-    "돈까스",
-    "떡볶이",
-    "오므라이스",
-    "쫄면",
-    "카레",
-  ];
+  late TabController tabController = TabController(
+    length: menuCategory.length,
+    vsync: this,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: inversePrimaryColor,
         title: Text(widget.title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height: 100,
+              child: MenuTabBar(
+                tabController: tabController,
+                menuTabList: menuTabList,
+              ),
+            ),
             Expanded(
-              child: GridView(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                children: [
-                  for (int i = 0; i < menuImages.length; i++)
-                    Column(
-                      children: [
-                        Card(
-                          child: Image.asset(
-                            "assets/images/${menuImages[i]}",
-                            height: 200,
-                          ),
-                        ),
-                        Text(menuNames[i])
-                      ],
-                    )
+              child: TabBarView(
+                controller: tabController,
+                children: const [
+                  MenuList(menuCategory: 'korean'),
+                  MenuList(menuCategory: 'japanese'),
+                  MenuList(menuCategory: 'chinese'),
+                  MenuList(menuCategory: 'western'),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
