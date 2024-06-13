@@ -39,29 +39,32 @@ class _MyHomePageState extends State<MenuScreen>
         backgroundColor: inversePrimaryColor,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 100,
-              child: MenuTabBar(
-                tabController: tabController,
-                menuTabList: menuTabList,
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 100,
+                child: MenuTabBar(
+                  tabController: tabController,
+                  menuTabList: menuTabList,
+                ),
               ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: const [
-                  MenuList(menuCategory: 'korean'),
-                  MenuList(menuCategory: 'japanese'),
-                  MenuList(menuCategory: 'chinese'),
-                  MenuList(menuCategory: 'western'),
-                ],
+              Expanded(
+                child: TabBarView(
+                  controller: tabController,
+                  children: const [
+                    MenuList(menuCategory: 'korean'),
+                    MenuList(menuCategory: 'japanese'),
+                    MenuList(menuCategory: 'chinese'),
+                    MenuList(menuCategory: 'western'),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

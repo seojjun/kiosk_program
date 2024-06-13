@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:kiosk_program/service/firestore_module.dart';
 import 'package:kiosk_program/utils/colors.dart';
 
@@ -54,15 +55,46 @@ class _MenuListState extends State<MenuList> {
             ),
             itemCount: menuId.length,
             itemBuilder: (context, index) {
-              return Card(
-                child: Column(
-                  children: [
-                    Text(menuName[index]),
-                    Text(
-                      menuPrice[index].toString(),
+              return Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: tabColor,
+                        border: Border.all(
+                          color: Colors.grey,
+                        ),
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(15),
+                        ),
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  Container(
+                    width: width,
+                    margin: const EdgeInsets.only(top: 5),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey,
+                      ),
+                      borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(15),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(menuName[index]),
+                        Text(
+                          '${NumberFormat('##,###').format(menuPrice[index])}원',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               );
             },
           );
