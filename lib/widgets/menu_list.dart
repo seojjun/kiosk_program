@@ -57,6 +57,9 @@ class _MenuListState extends State<MenuList> {
           ),
         );
       },
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.4),
+      barrierLabel: '',
     );
   }
 

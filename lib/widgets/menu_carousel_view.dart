@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:kiosk_program/utils/colors.dart';
+import 'package:kiosk_program/widgets/custom_button.dart';
 
 class MenuCarouselView extends StatefulWidget {
   const MenuCarouselView({super.key});

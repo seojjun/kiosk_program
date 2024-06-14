@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/providers/payment_amount_provider.dart';
+import 'package:kiosk_program/screens/payment_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
 import 'package:kiosk_program/utils/custom_scroll_behavior.dart';
 import 'package:kiosk_program/utils/functions.dart';
 import 'package:kiosk_program/widgets/added_menu_box.dart';
 import 'package:kiosk_program/widgets/custom_button.dart';
+import 'package:kiosk_program/widgets/order_dialog.dart';
 import 'package:provider/provider.dart';
 
 class MenuBottomBar extends StatefulWidget {
@@ -15,6 +17,30 @@ class MenuBottomBar extends StatefulWidget {
 }
 
 class _MenuBottomBarState extends State<MenuBottomBar> {
+  void showOrderDialog({required Function onTapEvent}) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (context, anim1, anim2) {
+        return OrderDialog(
+          onTapEvent: onTapEvent,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 200),
+      transitionBuilder: (context, anim1, anim2, widget) {
+        return Transform.scale(
+          scale: anim1.value,
+          child: Opacity(
+            opacity: anim1.value,
+            child: widget,
+          ),
+        );
+      },
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.4),
+      barrierLabel: '',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final menuList = context
@@ -96,7 +122,18 @@ class _MenuBottomBarState extends State<MenuBottomBar> {
                     text: '주문하기',
                     textColor: Colors.white,
                     btnColor: inversePrimaryColor,
-                    onTapEvent: () {},
+                    onTapEvent: () {
+                      if (menuList.isEmpty) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(alertSnackBar());
+                      } else {
+                        showOrderDialog(
+                          onTapEvent: () {
+                            Navigator.of(context).push(paymentScreenRoute());
+                          },
+                        );
+                      }
+                    },
                   ),
                 ],
               ),
@@ -106,4 +143,37 @@ class _MenuBottomBarState extends State<MenuBottomBar> {
       ),
     );
   }
+}
+
+Route paymentScreenRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const PaymentScreen(title: '결제 페이지'),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(1.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
+
+SnackBar alertSnackBar() {
+  return SnackBar(
+    backgroundColor: Colors.red[400],
+    duration: const Duration(seconds: 2),
+    content: const Text(
+      "메뉴를 추가하고 다시 시도해 주세요.",
+      style: TextStyle(
+        fontWeight: FontWeight.w600,
+      ),
+      textAlign: TextAlign.center,
+    ),
+  );
 }

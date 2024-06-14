@@ -1,14 +1,12 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 import 'dart:html';
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kiosk_program/firebase_options.dart';
 import 'package:kiosk_program/providers/payment_amount_provider.dart';
 import 'package:kiosk_program/screens/home_screen.dart';
 import 'package:kiosk_program/screens/menu_screen.dart';
-import 'package:kiosk_program/widgets/menu_add_widget_.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -36,8 +34,8 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         // home: const MenuAddWidget(),
-        // home: const HomeScreen(),
-        home: const MenuScreen(title: '리뷰 추천 키오스크'),
+        home: const HomeScreen(),
+        // home: const MenuScreen(title: '리뷰 추천 키오스크'),
       ),
     );
   }
