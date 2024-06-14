@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
-import 'package:kiosk_program/service/firestore_module.dart';
+import 'package:kiosk_program/models/firestore_module.dart';
 import 'package:kiosk_program/utils/colors.dart';
+import 'package:kiosk_program/widgets/menu_box.dart';
+import 'package:kiosk_program/widgets/menu_info_dialog.dart';
 
 class MenuList extends StatefulWidget {
   const MenuList({
@@ -33,12 +33,31 @@ class _MenuListState extends State<MenuList> {
     menuId = FirestoreModule.menuInfo[widget.menuCategory].keys.toList();
 
     for (var id in menuId) {
-      {
-        menuName.add(FirestoreModule.menuInfo[widget.menuCategory][id]['name']);
-        menuPrice
-            .add(FirestoreModule.menuInfo[widget.menuCategory][id]['price']);
-      }
+      menuName.add(FirestoreModule.menuInfo[widget.menuCategory][id]['name']);
+      menuPrice.add(FirestoreModule.menuInfo[widget.menuCategory][id]['price']);
     }
+  }
+
+  void showMenuInfoDialog(String menuName, int menuPrice) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (context, anim1, anim2) {
+        return MenuInfoDialog(
+          menuName: menuName,
+          menuPrice: menuPrice,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 200),
+      transitionBuilder: (context, anim1, anim2, widget) {
+        return Transform.scale(
+          scale: anim1.value,
+          child: Opacity(
+            opacity: anim1.value,
+            child: widget,
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -50,51 +69,17 @@ class _MenuListState extends State<MenuList> {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: MediaQuery.of(context).size.width ~/ width,
+              mainAxisExtent: width,
               crossAxisSpacing: 20.0,
               mainAxisSpacing: 20.0,
             ),
             itemCount: menuId.length,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: tabColor,
-                        border: Border.all(
-                          color: Colors.grey,
-                        ),
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: width,
-                    margin: const EdgeInsets.only(top: 5),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                      ),
-                      borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(15),
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(menuName[index]),
-                        Text(
-                          '${NumberFormat('##,###').format(menuPrice[index])}원',
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+              return MenuBox(
+                menuName: menuName[index],
+                menuPrice: menuPrice[index],
+                width: width,
+                onTapSowMenuInfoDialog: showMenuInfoDialog,
               );
             },
           );

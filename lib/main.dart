@@ -5,9 +5,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kiosk_program/firebase_options.dart';
+import 'package:kiosk_program/providers/payment_amount_provider.dart';
 import 'package:kiosk_program/screens/home_screen.dart';
 import 'package:kiosk_program/screens/menu_screen.dart';
 import 'package:kiosk_program/widgets/menu_add_widget_.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,16 +26,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '리뷰 추천 키오스크',
-      theme: ThemeData(
-        useMaterial3: false,
-        fontFamily: 'Pretendard',
+    return ChangeNotifierProvider(
+      create: (_) => PaymentAmountProvider(),
+      child: MaterialApp(
+        title: '리뷰 추천 키오스크',
+        theme: ThemeData(
+          useMaterial3: false,
+          fontFamily: 'Pretendard',
+        ),
+        debugShowCheckedModeBanner: false,
+        // home: const MenuAddWidget(),
+        // home: const HomeScreen(),
+        home: const MenuScreen(title: '리뷰 추천 키오스크'),
       ),
-      debugShowCheckedModeBanner: false,
-      // home: const MenuAddWidget(),
-      // home: const HomeScreen(),
-      home: const MenuScreen(title: '리뷰 추천 키오스크'),
     );
   }
 }

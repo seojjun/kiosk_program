@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kiosk_program/service/firestore_module.dart';
+import 'package:kiosk_program/models/firestore_module.dart';
 
 enum Category { korean, japanese, chinese, western }
 

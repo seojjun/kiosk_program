@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/utils/colors.dart';
 import 'package:kiosk_program/utils/menu_category.dart';
-import 'package:kiosk_program/widgets/menu_list.dart';
+import 'package:kiosk_program/widgets/menu_bottom_bar.dart';
+import 'package:kiosk_program/widgets/menu_tab_bar_view.dart';
 import 'package:kiosk_program/widgets/menu_tab_bar.dart';
 import 'package:logger/logger.dart';
 
@@ -37,34 +38,29 @@ class _MyHomePageState extends State<MenuScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: inversePrimaryColor,
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: SizedBox(
                 height: 100,
                 child: MenuTabBar(
                   tabController: tabController,
                   menuTabList: menuTabList,
                 ),
               ),
-              Expanded(
-                child: TabBarView(
-                  controller: tabController,
-                  children: const [
-                    MenuList(menuCategory: 'korean'),
-                    MenuList(menuCategory: 'japanese'),
-                    MenuList(menuCategory: 'chinese'),
-                    MenuList(menuCategory: 'western'),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+            MenuTabBarView(
+              tabController: tabController,
+            ),
+            const MenuBottomBar(),
+          ],
         ),
       ),
     );
