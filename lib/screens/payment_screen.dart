@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/utils/colors.dart';
+import 'package:kiosk_program/utils/data_info.dart';
+import 'package:kiosk_program/widgets/custom_alert_dialog.dart';
+import 'package:kiosk_program/widgets/payment_method_button.dart';
 import 'package:logger/logger.dart';
 
 var logger = Logger();
@@ -18,20 +21,79 @@ class PaymentScreen extends StatefulWidget {
 
 class _MyHomePageState extends State<PaymentScreen>
     with SingleTickerProviderStateMixin {
+  final double width = 200;
+
+  void showWaitDialog(String title, Widget loadingAnimationWidget) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (context, anim1, anim2) {
+        return CustomAlertDialog(
+          title: title,
+          loadingAnimationWidget: loadingAnimationWidget,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 200),
+      transitionBuilder: (context, anim1, anim2, widget) {
+        return Transform.scale(
+          scale: anim1.value,
+          child: Opacity(
+            opacity: anim1.value,
+            child: widget,
+          ),
+        );
+      },
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.4),
+      barrierLabel: '',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: inversePrimaryColor,
+        centerTitle: true,
         title: Text(
           widget.title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(),
+            const SizedBox(
+              height: 200,
+              child: Center(
+                child: Text(
+                  '결제 수단을 선택해 주세요',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: MediaQuery.of(context).size.width ~/ width,
+                  crossAxisSpacing: 20.0,
+                  mainAxisSpacing: 20.0,
+                ),
+                itemCount: paymentMethod.length,
+                itemBuilder: (context, index) {
+                  return PaymentMethodButton(
+                    name: paymentMethod[index],
+                    onTapEvent: showWaitDialog,
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

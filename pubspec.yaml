@@ -43,6 +43,7 @@ dependencies:
   provider: ^6.1.2
   data_table_2: ^2.5.15
   banner_carousel: ^1.2.1
+  loading_animation_widget: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +68,9 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
+    - assets/menu/
+    - assets/payment/
+    - assets/gif/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -7,6 +7,8 @@ import 'package:kiosk_program/firebase_options.dart';
 import 'package:kiosk_program/providers/payment_amount_provider.dart';
 import 'package:kiosk_program/screens/home_screen.dart';
 import 'package:kiosk_program/screens/menu_screen.dart';
+import 'package:kiosk_program/screens/payment_screen.dart';
+import 'package:kiosk_program/utils/data_info.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -34,8 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         // home: const MenuAddWidget(),
-        home: const HomeScreen(),
-        // home: const MenuScreen(title: '리뷰 추천 키오스크'),
+        home: const HomeScreen(title: homeScreenTitle),
+        // home: const MenuScreen(title: menuScreenTitle),
+        // home: const PaymentScreen(title: paymentScreenTitle),
       ),
     );
   }

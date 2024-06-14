@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/utils/colors.dart';
-import 'package:kiosk_program/utils/menu_category.dart';
+import 'package:kiosk_program/utils/data_info.dart';
 import 'package:kiosk_program/widgets/menu_bottom_bar.dart';
 import 'package:kiosk_program/widgets/menu_tab_bar_view.dart';
 import 'package:kiosk_program/widgets/menu_tab_bar.dart';
@@ -38,8 +38,12 @@ class _MyHomePageState extends State<MenuScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: inversePrimaryColor,
+        centerTitle: true,
         title: Text(
           widget.title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: Center(
