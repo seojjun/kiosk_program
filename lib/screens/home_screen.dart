@@ -6,7 +6,7 @@ import 'package:kiosk_program/utils/data_info.dart';
 import 'package:kiosk_program/widgets/custom_button.dart';
 import 'package:kiosk_program/widgets/menu_carousel_view.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
     required this.title,
@@ -15,11 +15,6 @@ class HomeScreen extends StatefulWidget {
   final String title;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bottomColorWithOpacity,
@@ -27,39 +22,37 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: inversePrimaryColor,
         centerTitle: true,
         title: Text(
-          widget.title,
+          title,
           style: const TextStyle(
             fontWeight: FontWeight.w600,
           ),
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MenuCarouselView(
-                menuBanners: [
-                  BannerModel(imagePath: 'assets/menu/김밥.jpg', id: '1'),
-                  BannerModel(imagePath: 'assets/menu/돈까스.jpg', id: '2'),
-                  BannerModel(imagePath: 'assets/menu/떡볶이.jpg', id: '3'),
-                  BannerModel(imagePath: 'assets/menu/오므라이스.jpg', id: '4'),
-                ],
-              ),
-              CustomButton(
-                text: '메뉴 보기',
-                btnColor: inversePrimaryColor,
-                textColor: Colors.white,
-                onTapEvent: () {
-                  Navigator.of(context).push(menuScreenRoute());
-                },
-              ),
-              const SizedBox(
-                height: 3,
-              ),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            MenuCarouselView(
+              menuBanners: [
+                BannerModel(imagePath: 'assets/menu/김밥.jpg', id: '1'),
+                BannerModel(imagePath: 'assets/menu/돈까스.jpg', id: '2'),
+                BannerModel(imagePath: 'assets/menu/떡볶이.jpg', id: '3'),
+                BannerModel(imagePath: 'assets/menu/오므라이스.jpg', id: '4'),
+              ],
+            ),
+            CustomButton(
+              text: '메뉴 보기',
+              btnColor: inversePrimaryColor,
+              textColor: Colors.white,
+              onTapEvent: () {
+                Navigator.of(context).push(menuScreenRoute());
+              },
+            ),
+            const SizedBox(
+              height: 3,
+            ),
+          ],
         ),
       ),
     );

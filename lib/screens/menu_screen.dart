@@ -46,26 +46,24 @@ class _MyHomePageState extends State<MenuScreen>
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: SizedBox(
-                height: 100,
-                child: MenuTabBar(
-                  tabController: tabController,
-                  menuTabList: menuTabList,
-                ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SizedBox(
+              height: 100,
+              child: MenuTabBar(
+                tabController: tabController,
+                menuTabList: menuTabList,
               ),
             ),
-            MenuTabBarView(
-              tabController: tabController,
-            ),
-            const MenuBottomBar(),
-          ],
-        ),
+          ),
+          MenuTabBarView(
+            tabController: tabController,
+          ),
+          const MenuBottomBar(),
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
 const String homeScreenTitle = 'GTEC 리뷰 추천 키오스크';
 const String menuScreenTitle = '메뉴';
 const String paymentScreenTitle = '결제';
+const String resultScreenTitle = '결제 완료';
 
 const String korean = '한식';
 const String japanese = '일식';

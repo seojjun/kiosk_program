@@ -8,6 +8,7 @@ import 'package:kiosk_program/providers/payment_amount_provider.dart';
 import 'package:kiosk_program/screens/home_screen.dart';
 import 'package:kiosk_program/screens/menu_screen.dart';
 import 'package:kiosk_program/screens/payment_screen.dart';
+import 'package:kiosk_program/screens/result_screen.dart';
 import 'package:kiosk_program/utils/data_info.dart';
 import 'package:provider/provider.dart';
 
@@ -36,9 +37,10 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         // home: const MenuAddWidget(),
-        home: const HomeScreen(title: homeScreenTitle),
+        // home: const HomeScreen(title: homeScreenTitle),
         // home: const MenuScreen(title: menuScreenTitle),
         // home: const PaymentScreen(title: paymentScreenTitle),
+        home: const ResultScreen(title: resultScreenTitle),
       ),
     );
   }
