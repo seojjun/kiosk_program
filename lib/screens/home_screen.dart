@@ -1,3 +1,4 @@
+import 'package:banner_carousel/banner_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/screens/menu_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
@@ -15,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bottomColorWithOpacity,
       appBar: AppBar(
         backgroundColor: inversePrimaryColor,
         title: const Text(
@@ -23,16 +25,26 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const MenuCarouselView(),
+            MenuCarouselView(
+              menuBanners: [
+                BannerModel(imagePath: 'assets/images/김밥.jpg', id: '1'),
+                BannerModel(imagePath: 'assets/images/돈까스.jpg', id: '2'),
+                BannerModel(imagePath: 'assets/images/떡볶이.jpg', id: '3'),
+                BannerModel(imagePath: 'assets/images/오므라이스.jpg', id: '4'),
+              ],
+            ),
             CustomButton(
-              text: 'test',
+              text: '메뉴 보기',
               btnColor: inversePrimaryColor,
               textColor: Colors.white,
               onTapEvent: () {
                 Navigator.of(context).push(menuScreenRoute());
               },
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),
