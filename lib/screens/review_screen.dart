@@ -1,12 +1,12 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
-import 'package:kiosk_program/screens/review_screen.dart';
+import 'package:kiosk_program/screens/home_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
 import 'package:kiosk_program/utils/data_info.dart';
+import 'package:kiosk_program/widgets/custom_button.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
-class ResultScreen extends StatefulWidget {
-  const ResultScreen({
+class ReviewScreen extends StatelessWidget {
+  const ReviewScreen({
     super.key,
     required this.title,
   });
@@ -14,26 +14,14 @@ class ResultScreen extends StatefulWidget {
   final String title;
 
   @override
-  State<ResultScreen> createState() => _ResultScreenState();
-}
-
-class _ResultScreenState extends State<ResultScreen> {
-  Future<void> waitCookingTime() async {
-    await Future.delayed(const Duration(seconds: 5));
-
-    Navigator.of(context).pushReplacement(reviewScreenRoute());
-  }
-
-  @override
   Widget build(BuildContext context) {
-    waitCookingTime();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: inversePrimaryColor,
         centerTitle: true,
         title: Text(
-          widget.title,
+          title,
           style: const TextStyle(
             fontWeight: FontWeight.w600,
           ),
@@ -46,7 +34,7 @@ class _ResultScreenState extends State<ResultScreen> {
             height: 200,
             child: Center(
               child: Text(
-                '조리 중...',
+                '주문하신 메뉴에 대한 리뷰를 작성해 주세요!',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w700,
@@ -54,19 +42,33 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
             ),
           ),
-          Image.asset(
-            'assets/gif/chef_2.gif',
+          QrImageView(
+            data: 'This is a simple QR code',
+            version: QrVersions.auto,
+            size: 320,
+            gapless: false,
           ),
+          const SizedBox(
+            height: 75,
+          ),
+          CustomButton(
+            text: '홈으로',
+            btnColor: inversePrimaryColor,
+            textColor: Colors.white,
+            onTapEvent: () {
+              Navigator.of(context).pushReplacement(homeScreenRoute());
+            },
+          )
         ],
       ),
     );
   }
 }
 
-Route reviewScreenRoute() {
+Route homeScreenRoute() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) =>
-        const ReviewScreen(title: reviewScreenTitle),
+        const HomeScreen(title: homeScreenTitle),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(1.0, 0.0);
       const end = Offset.zero;
