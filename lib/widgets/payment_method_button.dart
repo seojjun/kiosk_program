@@ -48,7 +48,10 @@ class _PaymentMethodButtonState extends State<PaymentMethodButton> {
 
             await Future.delayed(const Duration(seconds: 5));
 
-            Navigator.of(context).push(resultScreenRoute());
+            Navigator.of(context).pushAndRemoveUntil(
+              resultScreenRoute(),
+              (route) => false,
+            );
           },
           child: Container(
             width: 150,
@@ -63,12 +66,19 @@ class _PaymentMethodButtonState extends State<PaymentMethodButton> {
                 colorFilter: isHovered
                     ? const ColorFilter.mode(
                         Colors.grey,
-                        BlendMode.darken,
+                        BlendMode.multiply,
                       )
                     : null,
                 image: NetworkImage('assets/payment/${widget.name}.png'),
               ),
             ),
+            child: isHovered
+                ? const Icon(
+                    Icons.check,
+                    color: Color.fromARGB(255, 193, 255, 249),
+                    size: 75,
+                  )
+                : null,
           ),
         ),
         const SizedBox(

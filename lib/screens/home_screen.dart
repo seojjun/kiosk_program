@@ -33,12 +33,18 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const SizedBox(
+              height: 3,
+            ),
             MenuCarouselView(
               menuBanners: [
-                BannerModel(imagePath: 'assets/menu/김밥.jpg', id: '1'),
-                BannerModel(imagePath: 'assets/menu/돈까스.jpg', id: '2'),
-                BannerModel(imagePath: 'assets/menu/떡볶이.jpg', id: '3'),
-                BannerModel(imagePath: 'assets/menu/오므라이스.jpg', id: '4'),
+                BannerModel(imagePath: 'assets/menu/korean/김밥.jpg', id: '1'),
+                BannerModel(
+                    imagePath: 'assets/menu/japanese/오므라이스.jpg', id: '2'),
+                BannerModel(
+                    imagePath: 'assets/menu/chinese/새우볶음밥.jpg', id: '3'),
+                BannerModel(
+                    imagePath: 'assets/menu/western/오일 스파게티.jpg', id: '4'),
               ],
             ),
             CustomButton(

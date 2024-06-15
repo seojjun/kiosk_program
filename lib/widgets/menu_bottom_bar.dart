@@ -114,6 +114,7 @@ class _MenuBottomBarState extends State<MenuBottomBar> {
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 30,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(

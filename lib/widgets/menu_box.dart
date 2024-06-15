@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:kiosk_program/utils/colors.dart';
 import 'package:kiosk_program/utils/functions.dart';
 
 class MenuBox extends StatefulWidget {
   const MenuBox({
     super.key,
+    required this.menuCategory,
     required this.menuName,
     required this.menuPrice,
     required this.width,
-    required this.onTapSowMenuInfoDialog,
+    required this.onTapShowMenuInfoDialog,
   });
 
+  final String menuCategory;
   final String menuName;
   final int menuPrice;
   final double width;
-  final Function onTapSowMenuInfoDialog;
+  final Function onTapShowMenuInfoDialog;
 
   @override
   State<MenuBox> createState() => _MenuBoxState();
@@ -22,6 +23,8 @@ class MenuBox extends StatefulWidget {
 
 class _MenuBoxState extends State<MenuBox> {
   bool isHovered = false;
+  late String menuImagePath =
+      'assets/menu/${widget.menuCategory}/${widget.menuName}.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,11 @@ class _MenuBoxState extends State<MenuBox> {
         setState(() => isHovered = value);
       },
       onTap: () {
-        widget.onTapSowMenuInfoDialog(widget.menuName, widget.menuPrice);
+        widget.onTapShowMenuInfoDialog(
+          menuImagePath,
+          widget.menuName,
+          widget.menuPrice,
+        );
       },
       child: Column(
         children: [
@@ -43,17 +50,29 @@ class _MenuBoxState extends State<MenuBox> {
             child: Container(
               width: widget.width,
               decoration: BoxDecoration(
-                color: menuColor,
                 border: Border.all(
                   color: Colors.grey,
                 ),
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(15),
                 ),
+                image: DecorationImage(
+                  colorFilter: isHovered
+                      ? const ColorFilter.mode(
+                          Colors.grey,
+                          BlendMode.multiply,
+                        )
+                      : null,
+                  image: AssetImage(
+                    menuImagePath,
+                  ),
+                  fit: BoxFit.fill,
+                ),
               ),
               child: isHovered
                   ? const Icon(
-                      Icons.add,
+                      Icons.add_shopping_cart,
+                      color: Color.fromARGB(255, 193, 255, 249),
                       size: 75,
                     )
                   : null,

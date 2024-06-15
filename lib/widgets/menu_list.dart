@@ -38,11 +38,13 @@ class _MenuListState extends State<MenuList> {
     }
   }
 
-  void showMenuInfoDialog(String menuName, int menuPrice) {
+  void showMenuInfoDialog(
+      String menuImagePath, String menuName, int menuPrice) {
     showGeneralDialog(
       context: context,
       pageBuilder: (context, anim1, anim2) {
         return MenuInfoDialog(
+          menuImagePath: menuImagePath,
           menuName: menuName,
           menuPrice: menuPrice,
         );
@@ -76,10 +78,11 @@ class _MenuListState extends State<MenuList> {
             itemCount: menuId.length,
             itemBuilder: (context, index) {
               return MenuBox(
+                menuCategory: widget.menuCategory,
                 menuName: menuName[index],
                 menuPrice: menuPrice[index],
                 width: width,
-                onTapSowMenuInfoDialog: showMenuInfoDialog,
+                onTapShowMenuInfoDialog: showMenuInfoDialog,
               );
             },
           );

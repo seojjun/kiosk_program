@@ -9,10 +9,12 @@ import 'package:provider/provider.dart';
 class MenuInfoDialog extends StatelessWidget {
   const MenuInfoDialog({
     super.key,
+    required this.menuImagePath,
     required this.menuName,
     required this.menuPrice,
   });
 
+  final String menuImagePath;
   final String menuName;
   final int menuPrice;
 
@@ -35,14 +37,18 @@ class MenuInfoDialog extends StatelessWidget {
                   fit: FlexFit.loose,
                   child: Container(
                     constraints: const BoxConstraints(
-                      maxWidth: 300,
+                      maxWidth: 350,
                       maxHeight: 300,
                     ),
-                    width: 300,
+                    width: 350,
                     height: 300,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                        image: AssetImage(menuImagePath),
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                 ),

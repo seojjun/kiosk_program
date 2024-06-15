@@ -44,6 +44,7 @@ dependencies:
   data_table_2: ^2.5.15
   banner_carousel: ^1.2.1
   loading_animation_widget: ^1.2.1
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +69,10 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/menu/
+    - assets/menu/korean/
+    - assets/menu/japanese/
+    - assets/menu/chinese/
+    - assets/menu/western/
     - assets/payment/
     - assets/gif/
 
