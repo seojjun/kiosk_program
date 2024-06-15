@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kiosk_program/providers/payment_amount_provider.dart';
 import 'package:kiosk_program/screens/home_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
 import 'package:kiosk_program/utils/data_info.dart';
 import 'package:kiosk_program/widgets/custom_button.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class ReviewScreen extends StatelessWidget {
@@ -56,6 +58,7 @@ class ReviewScreen extends StatelessWidget {
             btnColor: inversePrimaryColor,
             textColor: Colors.white,
             onTapEvent: () {
+              context.read<PaymentAmountProvider>().reset();
               Navigator.of(context).pushReplacement(homeScreenRoute());
             },
           )

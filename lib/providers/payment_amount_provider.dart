@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PaymentAmountProvider with ChangeNotifier {
   int _amount = 0;
-  final Map<String, Map<String, int>> _menuMap = {};
+  Map<String, Map<String, int>> _menuMap = {};
 
   Map get menuMap => _menuMap;
   int get amount => _amount;
@@ -55,5 +55,10 @@ class PaymentAmountProvider with ChangeNotifier {
     _menuMap.remove(name);
 
     notifyListeners();
+  }
+
+  void reset() {
+    _amount = 0;
+    _menuMap = {};
   }
 }
