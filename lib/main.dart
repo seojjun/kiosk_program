@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => PaymentAmountProvider(),
       child: MaterialApp(
-        title: '리뷰 추천 키오스크',
+        title: 'GTEC 리뷰 추천 키오스크',
         theme: ThemeData(
           useMaterial3: false,
           fontFamily: 'Pretendard',
