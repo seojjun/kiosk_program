@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/providers/payment_amount_provider.dart';
 import 'package:kiosk_program/screens/home_screen.dart';
@@ -45,7 +47,7 @@ class ReviewScreen extends StatelessWidget {
             ),
           ),
           QrImageView(
-            data: 'This is a simple QR code',
+            data: jsonEncode(context.read<PaymentAmountProvider>().menuMap),
             version: QrVersions.auto,
             size: 320,
             gapless: false,
