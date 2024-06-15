@@ -1,14 +1,28 @@
 {
-    "flutter": {
-        "platforms": {
-            "dart": {
-                "lib/firebase_options.dart": {
-                    "projectId": "kiosk-program",
-                    "configurations": {
-                        "web": "1:292774479797:web:d816955aa50639709f3bfc"
-                    }
-                }
-            }
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "kiosk-program",
+          "configurations": {
+            "web": "1:292774479797:web:d816955aa50639709f3bfc"
+          }
         }
+      }
     }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }
