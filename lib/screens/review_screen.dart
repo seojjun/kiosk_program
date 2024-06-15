@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/providers/payment_amount_provider.dart';
-import 'package:kiosk_program/screens/home_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
-import 'package:kiosk_program/utils/data_info.dart';
+import 'package:kiosk_program/utils/screen_route.dart';
 import 'package:kiosk_program/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -30,6 +29,19 @@ class ReviewScreen extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          IconButton(
+            hoverColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              Navigator.of(context).push(creditScreenRoute());
+            },
+            icon: const Icon(
+              Icons.info_outline,
+            ),
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -68,23 +80,4 @@ class ReviewScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-Route homeScreenRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const HomeScreen(title: homeScreenTitle),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/providers/payment_amount_provider.dart';
-import 'package:kiosk_program/screens/payment_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
 import 'package:kiosk_program/utils/custom_scroll_behavior.dart';
-import 'package:kiosk_program/utils/data_info.dart';
 import 'package:kiosk_program/utils/functions.dart';
+import 'package:kiosk_program/utils/screen_route.dart';
 import 'package:kiosk_program/widgets/added_menu_box.dart';
 import 'package:kiosk_program/widgets/custom_button.dart';
 import 'package:kiosk_program/widgets/order_dialog.dart';
@@ -145,25 +144,6 @@ class _MenuBottomBarState extends State<MenuBottomBar> {
       ),
     );
   }
-}
-
-Route paymentScreenRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const PaymentScreen(title: paymentScreenTitle),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
 }
 
 SnackBar alertSnackBar() {

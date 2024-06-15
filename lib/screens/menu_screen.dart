@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/utils/colors.dart';
 import 'package:kiosk_program/utils/data_info.dart';
+import 'package:kiosk_program/utils/screen_route.dart';
 import 'package:kiosk_program/widgets/menu_bottom_bar.dart';
 import 'package:kiosk_program/widgets/menu_tab_bar_view.dart';
 import 'package:kiosk_program/widgets/menu_tab_bar.dart';
@@ -45,6 +46,19 @@ class _MyHomePageState extends State<MenuScreen>
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          IconButton(
+            hoverColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              Navigator.of(context).push(creditScreenRoute());
+            },
+            icon: const Icon(
+              Icons.info_outline,
+            ),
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

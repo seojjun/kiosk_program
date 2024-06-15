@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_web_libraries_in_flutter
+// ignore_for_file: avoid_web_libraries_in_flutter, unused_import
 import 'dart:html';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -10,6 +10,7 @@ import 'package:kiosk_program/screens/menu_screen.dart';
 import 'package:kiosk_program/screens/payment_screen.dart';
 import 'package:kiosk_program/screens/result_screen.dart';
 import 'package:kiosk_program/screens/review_screen.dart';
+import 'package:kiosk_program/screens/credit_screen.dart';
 import 'package:kiosk_program/utils/data_info.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         // home: const PaymentScreen(title: paymentScreenTitle),
         // home: const ResultScreen(title: resultScreenTitle),
         // home: const ReviewScreen(title: reviewScreenTitle),
+        // home: const CreditScreen(title: creditScreenTitle),
       ),
     );
   }

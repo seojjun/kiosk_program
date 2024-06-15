@@ -3,6 +3,7 @@ const String menuScreenTitle = '메뉴';
 const String paymentScreenTitle = '결제';
 const String resultScreenTitle = '결제 완료';
 const String reviewScreenTitle = '조리 완료';
+const String creditScreenTitle = '크레딧';
 
 const String korean = '한식';
 const String japanese = '일식';

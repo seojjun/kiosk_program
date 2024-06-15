@@ -1,9 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:kiosk_program/screens/review_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
-import 'package:kiosk_program/utils/data_info.dart';
+import 'package:kiosk_program/utils/screen_route.dart';
 
 class ResultScreen extends StatefulWidget {
   const ResultScreen({
@@ -38,6 +37,19 @@ class _ResultScreenState extends State<ResultScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          IconButton(
+            hoverColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              Navigator.of(context).push(creditScreenRoute());
+            },
+            icon: const Icon(
+              Icons.info_outline,
+            ),
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -61,23 +73,4 @@ class _ResultScreenState extends State<ResultScreen> {
       ),
     );
   }
-}
-
-Route reviewScreenRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const ReviewScreen(title: reviewScreenTitle),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
 }

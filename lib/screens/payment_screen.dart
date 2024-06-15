@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk_program/utils/colors.dart';
 import 'package:kiosk_program/utils/data_info.dart';
+import 'package:kiosk_program/utils/screen_route.dart';
 import 'package:kiosk_program/widgets/custom_alert_dialog.dart';
 import 'package:kiosk_program/widgets/payment_method_button.dart';
 import 'package:logger/logger.dart';
@@ -67,6 +68,19 @@ class _MyHomePageState extends State<PaymentScreen>
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          IconButton(
+            hoverColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              Navigator.of(context).push(creditScreenRoute());
+            },
+            icon: const Icon(
+              Icons.info_outline,
+            ),
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

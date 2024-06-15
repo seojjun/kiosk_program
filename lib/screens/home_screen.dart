@@ -1,8 +1,7 @@
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:flutter/material.dart';
-import 'package:kiosk_program/screens/menu_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
-import 'package:kiosk_program/utils/data_info.dart';
+import 'package:kiosk_program/utils/screen_route.dart';
 import 'package:kiosk_program/widgets/custom_button.dart';
 import 'package:kiosk_program/widgets/menu_carousel_view.dart';
 
@@ -27,6 +26,19 @@ class HomeScreen extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          IconButton(
+            hoverColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              Navigator.of(context).push(creditScreenRoute());
+            },
+            icon: const Icon(
+              Icons.info_outline,
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -63,23 +75,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-Route menuScreenRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const MenuScreen(title: menuScreenTitle),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
 }

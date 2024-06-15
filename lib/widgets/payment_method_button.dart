@@ -1,9 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:kiosk_program/screens/result_screen.dart';
 import 'package:kiosk_program/utils/colors.dart';
-import 'package:kiosk_program/utils/data_info.dart';
+import 'package:kiosk_program/utils/screen_route.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class PaymentMethodButton extends StatefulWidget {
@@ -69,7 +68,7 @@ class _PaymentMethodButtonState extends State<PaymentMethodButton> {
                         BlendMode.multiply,
                       )
                     : null,
-                image: NetworkImage('assets/payment/${widget.name}.png'),
+                image: AssetImage('assets/payment/${widget.name}.png'),
               ),
             ),
             child: isHovered
@@ -94,23 +93,4 @@ class _PaymentMethodButtonState extends State<PaymentMethodButton> {
       ],
     );
   }
-}
-
-Route resultScreenRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const ResultScreen(title: resultScreenTitle),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
 }
